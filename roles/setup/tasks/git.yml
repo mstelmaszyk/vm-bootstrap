@@ -1,0 +1,54 @@
+# -----------------------------------------------------------------------------
+# GIT SETUP
+# -----------------------------------------------------------------------------
+
+- name: Ensure Git is installed
+  become: yes
+  package:
+    name: git
+    state: present
+
+# -----------------------------------------------------------------------------
+# GIT SETUP
+# -----------------------------------------------------------------------------
+
+- name: Ensure Git user input is provided
+  assert:
+    that:
+      - git_user_name is defined
+      - git_user_name | length > 0
+      - git_user_email is defined
+      - git_user_email | length > 0
+    fail_msg: "Git user name and email must be provided"
+
+- name: Ensure .gitconfig exists
+  become: false
+  file:
+    path: "{{ home_dir }}/.gitconfig"
+    state: touch
+    mode: '0644'
+
+- name: Set Git user name
+  become: false
+  git_config:
+    name: user.name
+    value: "{{ git_user_name }}"
+    scope: global
+
+- name: Set Git user email
+  become: false
+  git_config:
+    name: user.email
+    value: "{{ git_user_email }}"
+    scope: global
+
+- name: Configure Git aliases
+  become: false
+  git_config:
+    name: "alias.{{ item.key }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop: "{{ git_config.alias | dict2items }}"
+  when: git_config.alias is defined
+
+# -----------------------------------------------------------------------------

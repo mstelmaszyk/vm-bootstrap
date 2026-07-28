@@ -1,0 +1,54 @@
+# -----------------------------------------------------------------------------
+# GIT CONFIGURATION
+# -----------------------------------------------------------------------------
+
+git_config:
+  core:
+    editor: vim
+  alias:
+    logline: "log --all --decorate --oneline --graph"
+
+# -----------------------------------------------------------------------------
+# ZSH CONFIGURATION
+# -----------------------------------------------------------------------------
+
+zsh_plugins:
+  - name: git
+  - name: zsh-syntax-highlighting
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+  - name: zsh-autosuggestions
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+  - name: zsh-vi-mode
+    repo: https://github.com/jeffreytse/zsh-vi-mode
+
+zsh_theme:
+  name: powerlevel10k
+  theme: "powerlevel10k/powerlevel10k"
+  repo: "https://github.com/romkatv/powerlevel10k.git"
+  config_file: .p10k.zsh
+
+zsh_functions:
+  - cd
+
+# -----------------------------------------------------------------------------
+# VIM CONFIGURATION
+# -----------------------------------------------------------------------------
+
+vim_plugins:
+  - name: vim-surround
+    repo: https://github.com/tpope/vim-surround
+
+vim_zsh_functions:
+  - zvm
+
+# -----------------------------------------------------------------------------
+# PROJECT REPOSITORIES
+# -----------------------------------------------------------------------------
+
+repos:
+  -
+  # - name: TBD
+  #   repo: git@github.com
+  #   dest: "{{ home_dir }}/repos/TBD"
+
+# -----------------------------------------------------------------------------

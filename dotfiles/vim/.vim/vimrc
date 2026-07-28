@@ -1,0 +1,36 @@
+" -----------------------------------------------------------------------------
+" BASIC SETTINGS
+" -----------------------------------------------------------------------------
+
+set number
+set relativenumber
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nowrap
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set clipboard=unnamedplus
+set mouse=a
+
+" -----------------------------------------------------------------------------
+" PLUGINS (auto-loaded via native package)
+" -----------------------------------------------------------------------------
+
+" Plugins managed by vim-plug
+call plug#begin()
+
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+" -----------------------------------------------------------------------------
+" KEY MAPPINGS
+" -----------------------------------------------------------------------------
+
+let mapleader = " "

@@ -1,0 +1,31 @@
+# -----------------------------------------------------------------------------
+# GITLAB REPO CLONING
+# -----------------------------------------------------------------------------
+
+- name: Ensure directory ~/repos exists
+  file:
+    path: "{{ item.dest | dirname }}"
+    state: directory
+  loop: "{{ repos }}"
+
+# -----------------------------------------------------------------------------
+# CLONE REPOSITORIES
+# -----------------------------------------------------------------------------
+
+- name: Check if SSH key exists
+  stat:
+    path: "{{ home_dir }}/.ssh/id_ed25519"
+  register: ssh_key
+
+- name: Clone project repositories
+  become: false
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version | default('HEAD') }}"
+    update: yes
+    recursive: yes
+  loop: "{{ repos }}"
+  when: ssh_key.stat.exists
+
+# -----------------------------------------------------------------------------

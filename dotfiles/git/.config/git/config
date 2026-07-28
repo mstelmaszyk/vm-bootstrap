@@ -1,0 +1,9 @@
+[credential]
+	helper = "!f() { /home/mast/.vscode-server/bin/360a4e4fd251bfce169a4ddf857c7d25d1ad40da/node /tmp/vscode-remote-containers-4934335f-5efc-43c2-b8aa-72815a0369ce.js git-credential-helper $*; }; f"
+[user]
+	name = Marcin Stelmaszyk
+	email = mstelmaszyk@proton.me
+[alias]
+	logline = log --all --decorate --oneline --graph
+[core]
+	editor = vim

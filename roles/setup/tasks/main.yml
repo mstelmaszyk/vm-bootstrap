@@ -1,0 +1,30 @@
+- name: Ensure required packages are installed
+  package:
+    name:
+      - curl
+    state: present
+
+- name: Include SSH setup
+  import_tasks: ssh.yml
+  tags:
+    - ssh
+
+# - name: Include Git setup
+#   import_tasks: git.yml
+#   tags:
+#     - git
+
+- name: Include Zsh setup
+  import_tasks: zsh.yml
+  tags:
+    - zsh
+
+- name: Include Vim setup
+  import_tasks: vim.yml
+  tags:
+    - vim
+
+- name: Include repository cloning
+  import_tasks: repos.yml
+  tags:
+    - repos
