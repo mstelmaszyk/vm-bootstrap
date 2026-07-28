@@ -13,11 +13,20 @@ make
 Install with OS package manager:
 - stow
 
+---
+
+## Cloning
+Clone the repository to 
+```shell
+git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/share/vm-bootstrap
+```
+---
+
 ## Deployment
 
 Deploy a configuration of `TOOL`:
 ```shell
-$ stow <TOOL>
+stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R -- <TOOL>
 ```
 
 ## Cheatsheet
