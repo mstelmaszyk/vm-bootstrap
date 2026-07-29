@@ -13,6 +13,11 @@ make
 Install with OS package manager:
 - stow
 
+```shell
+wget https://mirror.de.leaseweb.net/epel/8/Everything/x86_64/Packages/s/stow-2.4.0-1.el8.noarch.rpm /tmp
+rpm -Uvh /tmp/stow-2.4.0-1.el8.noarch.rpm
+```
+
 ---
 
 ## Cloning
