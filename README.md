@@ -31,7 +31,7 @@ git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/share/vm-boot
 
 Deploy a configuration of `TOOL`:
 ```shell
-stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R -- <TOOL>
+stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
 ```
 
 ## Cheatsheet
