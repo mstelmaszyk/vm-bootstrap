@@ -26,8 +26,15 @@ Clone the repository to
 git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/share/vm-bootstrap
 ```
 ---
+## Dotfiles 
+- **git**
+- **tmux**
+- **vim**
+- **[zoxide](https://github.com/ajeetdsouza/zoxide)** - smarter cd command, inspired by z and autojump.
+It remembers which directories you use most frequently, so you can "jump" to them in just a few keystrokes.
+- **zsh**
 
-## Deployment
+### Deployment
 
 Deploy a configuration of `TOOL`:
 ```shell
