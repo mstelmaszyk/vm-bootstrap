@@ -1,9 +1,9 @@
 # cd with auto-ls
-cd () {
+function cd {
     pwd;
-    builtin cd "$@" && ls --color=auto -l
+    builtin cd "$@" && \ls --color=auto -l
 }
 
-ll () {
-    ls -Alh --group-directories-first --time-style=long-iso
+function ll {
+    \ls -Alh --group-directories-first --time-style=long-iso
 }
