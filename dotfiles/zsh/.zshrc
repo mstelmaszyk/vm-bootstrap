@@ -56,7 +56,7 @@ for file in $ZSH_CUSTOM/functions/*.zsh; do
   source "$file"
 done
 
-# M-. inserts last word from previous command
+# Meta-. inserts last word from the previous command
 bindkey '\e.' insert-last-word
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -79,6 +79,6 @@ bindkey '\e.' insert-last-word
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}'"
+export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}' --bind 'alt-j:down,alt-k:up'"
 source /usr/share/fzf/shell/key-bindings.zsh
 source /usr/share/fzf/shell/completion.zsh
