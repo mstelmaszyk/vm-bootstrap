@@ -23,12 +23,12 @@ rpm -Uvh /tmp/stow-2.4.0-1.el8.noarch.rpm
 ---
 
 ## Cloning
-Clone the repository to 
+Clone the repository to
 ```shell
 git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/share/vm-bootstrap
 ```
 ---
-## Dotfiles 
+## Dotfiles
 - **git**
 - **tmux**
 - **vim**
@@ -44,23 +44,26 @@ stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
 ```
 
 ## Cheatsheet
+
 ### tmux
 
 `C-a`: prefix key. `Ctrl` and `a` keys pressed together.
 
-`M`: Meta key. Right `Alt`
+`C-space`: second prefix key.
+
+`M`: Meta key. Left `Alt`
 
 `C-a ?` see a list of all available commands
 
 `C-a z`: make a pane go full screen. Hit it again to shink it back to its previous size
-#### Session handling
 
+#### Session handling
 
 `$ tmux new -s <SESSION_NAME>` create a new session
 
-`$ tmux ls` list the currently running sessions
+`$ tmux ls` list all currently running sessions
 
-`C-a d` detach current session (everyting is left running in the background)
+`C-a d` detach the current session (everyting is left running in the background)
 
 `$ tmux attach -t <SESSION_NAME>` attach to a named session
 
@@ -69,6 +72,7 @@ stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
 `C-a r` hot-reload configuration
 
 #### Spliting Panes
+
 `C-a |` split horizontally
 
 `C-a -` split vertically
