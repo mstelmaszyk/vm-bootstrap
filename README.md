@@ -11,6 +11,8 @@ make
 ## Requirements
 
 Install with OS package manager:
+- fzf
+- [bat/catbat](https://github.com/sharkdp/bat)
 - stow
 
 ```shell

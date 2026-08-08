@@ -79,4 +79,6 @@ bindkey '\e.' insert-last-word
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}'"
+source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/fzf/shell/completion.zsh

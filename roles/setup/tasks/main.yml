@@ -24,6 +24,11 @@
   tags:
     - vim
 
+- name: Include fzf setup
+  import_tasks: fzf.yml
+  tags:
+    - fzf
+
 - name: Include repository cloning
   import_tasks: repos.yml
   tags:

@@ -1,0 +1,15 @@
+- name: Install key-bindings
+  become: true
+  shell: |
+    sh -c "curl -fLo /usr/share/fzf/shell/key-bindings.zsh --create-dirs \
+    https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/shell/key-bindings.zsh && chmod o+r -R /usr/share/fzf/"
+  args:
+    executable: /bin/bash
+
+- name: Install completion
+  become: true
+  shell: |
+    sh -c "curl -fLo /usr/share/fzf/shell/completion.zsh \
+    https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/shell/completion.zsh"
+  args:
+    executable: /bin/bash

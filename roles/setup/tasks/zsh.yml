@@ -33,6 +33,27 @@
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
 
+
+# -----------------------------------------------------------------------------
+# INSTALL THEME
+# -----------------------------------------------------------------------------
+
+- name: Install Zsh theme
+  become: false
+  git:
+    repo: "{{ zsh_theme.repo }}"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/themes/{{ zsh_theme.name }}"
+    depth: 1
+  when: zsh_theme.repo is defined
+
+- name: Deploy theme config
+  become: false
+  copy:
+    src: "{{ zsh_theme.config_file }}"
+    dest: "{{ home_dir }}/.p10k.zsh"
+    mode: '0644'
+  when: zsh_theme.config_file is defined
+
 # -----------------------------------------------------------------------------
 # PLUGINS
 # -----------------------------------------------------------------------------
@@ -52,50 +73,5 @@
     depth: 1
   loop: "{{ zsh_plugins }}"
   when: item.repo is defined
-
-- name: Configure .zshrc plugins
-  become: false
-  lineinfile:
-    path: "{{ home_dir }}/.zshrc"
-    regexp: '^plugins='
-    line: "plugins=({{ zsh_plugins | map(attribute='name') | join(' ') }})"
-    create: yes
-
-# -----------------------------------------------------------------------------
-# INSTALL THEME
-# -----------------------------------------------------------------------------
-
-- name: Install Zsh theme
-  become: false
-  git:
-    repo: "{{ zsh_theme.repo }}"
-    dest: "{{ home_dir }}/.oh-my-zsh/custom/themes/{{ zsh_theme.name }}"
-    depth: 1
-  when: zsh_theme.repo is defined
-
-- name: Set Zsh theme
-  become: false
-  lineinfile:
-    path: "{{ home_dir }}/.zshrc"
-    regexp: '^ZSH_THEME='
-    line: 'ZSH_THEME="{{ zsh_theme.theme }}'
-
-- name: Deploy theme config
-  become: false
-  copy:
-    src: "{{ zsh_theme.config_file }}"
-    dest: "{{ home_dir }}/.p10k.zsh"
-    mode: '0644'
-  when: zsh_theme.config_file is defined
-
-- name: Load theme config in .zshrc
-  become: false
-  blockinfile:
-    path: "{{ home_dir }}/.zshrc"
-    insertafter: '^ZSH_THEME=\".*\"'
-    marker: "# {mark} ANSIBLE THEME CONFIG"
-    block: |
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-  when: zsh_theme.config_file is defined
 
 # -----------------------------------------------------------------------------
