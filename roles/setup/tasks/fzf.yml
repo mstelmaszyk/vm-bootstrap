@@ -1,15 +1,23 @@
-- name: Install key-bindings
-  become: true
-  shell: |
-    sh -c "curl -fLo /usr/share/fzf/shell/key-bindings.zsh --create-dirs \
-    https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/shell/key-bindings.zsh && chmod o+r -R /usr/share/fzf/"
-  args:
-    executable: /bin/bash
+- name: Ensure required packages are installed
+  package:
+    name:
+      - git
+      - curl
+    state: present
 
-- name: Install completion
-  become: true
-  shell: |
-    sh -c "curl -fLo /usr/share/fzf/shell/completion.zsh \
-    https://raw.githubusercontent.com/junegunn/fzf/refs/heads/master/shell/completion.zsh"
+- name: Clone fzf repository
+  become: false
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: ~/.local/src/fzf
+    version: master
+
+- name: Install fzf
+  become: false
+  command: ./install --no-zsh
   args:
-    executable: /bin/bash
+    chdir: ~/.local/src/fzf
+  register: fzf_install
+  no_log: false
+  async: 0
+  poll: 0
