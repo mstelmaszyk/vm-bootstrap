@@ -45,7 +45,17 @@ zstyle ':omz:update' frequency 7
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-vi-mode)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+# ----------------------------------------------------------------------------
+# VIM INTEGRATION
+# ----------------------------------------------------------------------------
+
+if command -v vim >/dev/null 2>&1; then
+    plugins+=(zsh-vi-mode)
+fi
+
+# ----------------------------------------------------------------------------
 
 source $ZSH/oh-my-zsh.sh
 
@@ -77,8 +87,18 @@ bindkey '\e.' insert-last-word
 # the $ZSH_CUSTOM folder, with .zsh extension. Examples:
 # - $ZSH_CUSTOM/aliases.zsh
 
+# ----------------------------------------------------------------------------
+# FZF INTEGRATION
+# ----------------------------------------------------------------------------
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}' --bind 'alt-j:down,alt-k:up'"
-source /usr/share/fzf/shell/key-bindings.zsh
-source /usr/share/fzf/shell/completion.zsh
+if command -v fzf >/dev/null 2>&1; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+    export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}' \
+                             --bind 'alt-j:down,alt-k:up'"
+
+    source ~/.fzf/shell/key-bindings.zsh
+    source ~/.fzf/shell/completion.zsh
+fi
+
+# ----------------------------------------------------------------------------
