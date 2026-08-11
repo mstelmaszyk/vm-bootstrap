@@ -91,14 +91,12 @@ bindkey '\e.' insert-last-word
 # FZF INTEGRATION
 # ----------------------------------------------------------------------------
 
-if command -v fzf >/dev/null 2>&1; then
+if [ -d ~/.local/src/fzf ]; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
     export FZF_DEFAULT_OPTS="--preview 'batcat --color=always {}' \
                              --bind 'alt-j:down,alt-k:up'"
 
-    source ~/.fzf/shell/key-bindings.zsh
-    source ~/.fzf/shell/completion.zsh
 fi
 
 # ----------------------------------------------------------------------------

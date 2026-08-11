@@ -5,6 +5,12 @@
       - curl
     state: present
 
+- name: Ensure fzf repository is not present
+  become: false
+  file:
+    path: ~/.local/src/fzf
+    state: absent
+
 - name: Clone fzf repository
   become: false
   git:
@@ -14,10 +20,18 @@
 
 - name: Install fzf
   become: false
-  command: ./install --no-zsh
+  command: ./install
   args:
     chdir: ~/.local/src/fzf
   register: fzf_install
   no_log: false
   async: 0
   poll: 0
+
+- name: Symlink fzf binary
+  become: false
+  file:
+    src: ~/.local/src/fzf/bin/fzf
+    path: ~/.local/bin/fzf
+    state: link
+    force: true
