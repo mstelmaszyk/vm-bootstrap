@@ -7,5 +7,5 @@ function cd {
 unalias ll 2>/dev/null
 
 function ll {
-    \ls -Alh --group-directories-first --time-style=long-iso
+    \ls -Alh --group-directories-first --time-style=long-iso --color=auto
 }
