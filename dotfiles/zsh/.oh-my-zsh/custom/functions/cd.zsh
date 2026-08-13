@@ -1,11 +1,14 @@
-# cd with auto-ls
-function cd {
-    pwd;
-    builtin cd "$@" && \ls --color=auto -l
+unalias ll 2>/dev/null
+function ll {
+    \ls -lh --group-directories-first --time-style=long-iso --color=auto
 }
 
-unalias ll 2>/dev/null
-
-function ll {
+unalias la 2>/dev/null
+function la {
     \ls -Alh --group-directories-first --time-style=long-iso --color=auto
+}
+
+function cd {
+    pwd;
+    builtin cd "$@" && ll
 }
