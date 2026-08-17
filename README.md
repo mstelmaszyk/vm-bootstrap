@@ -8,27 +8,24 @@ make
 ## TO-DO
 - Color Highlighter: https://github.com/dtonon/ch
 - cd replacement: https://github.com/ajeetdsouza/zoxide
-## Requirements
 
+## Requirements
 Install with OS package manager:
 - fzf
 - [bat/catbat](https://github.com/sharkdp/bat)
 - stow
 
-```shell
-wget https://mirror.de.leaseweb.net/epel/8/Everything/x86_64/Packages/s/stow-2.4.0-1.el8.noarch.rpm /tmp
-rpm -Uvh /tmp/stow-2.4.0-1.el8.noarch.rpm
-```
-
 ---
-
 ## Cloning
+
 Clone the repository to
 ```shell
-git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/share/vm-bootstrap
+git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/src/vm-bootstrap
 ```
+
 ---
 ## Dotfiles
+
 - **git**
 - **tmux**
 - **vim**
@@ -40,7 +37,7 @@ It remembers which directories you use most frequently, so you can "jump" to the
 
 Deploy a configuration of `TOOL`:
 ```shell
-stow -v -d ~/.local/share/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
+stow -v -d ~/.local/src/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
 ```
 
 ## Cheatsheet
