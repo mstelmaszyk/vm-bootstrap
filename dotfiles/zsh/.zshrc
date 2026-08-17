@@ -62,7 +62,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # Load custom functions
-for file in $ZSH_CUSTOM/functions/*.zsh; do
+for file in $ZSH/custom/functions/*.zsh; do
   source "$file"
 done
 
