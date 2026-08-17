@@ -37,7 +37,7 @@ It remembers which directories you use most frequently, so you can "jump" to the
 
 Deploy a configuration of `TOOL`:
 ```shell
-stow -v -d ~/.local/src/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
+stow --dotfiles -v -d ~/.local/src/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
 ```
 
 ## Cheatsheet

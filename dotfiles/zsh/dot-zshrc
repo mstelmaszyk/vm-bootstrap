@@ -57,6 +57,12 @@ fi
 
 # ----------------------------------------------------------------------------
 
+# BEGIN ANSIBLE CUSTOM FUNCTIONS
+# Load custom functions
+for file in /home/mast/.oh-my-zsh/custom/functions/*.zsh; do
+  source "$file"
+done
+# END ANSIBLE CUSTOM FUNCTIONS
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
