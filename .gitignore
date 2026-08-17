@@ -2,3 +2,4 @@
 dotfiles/tmux/.config/Code
 dotfiles/zsh/.oh-my-zsh/custom/plugins
 dotfiles/zsh/.oh-my-zsh/custom/themes
+dotfiles/vim/dot-vim/autoload
