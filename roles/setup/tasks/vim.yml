@@ -28,11 +28,6 @@
     executable: /bin/bash
   when: not autoload_dir.stat.exists
 
-- name: Print success message
-  ansible.builtin.debug:
-    msg: "Execute in Vim :PlugInstall"
-  when: vimrc_template.changed
-
 # -----------------------------------------------------------------------------
 # ADD VIM-RELATED ZSH FUNCTIONS
 # -----------------------------------------------------------------------------
