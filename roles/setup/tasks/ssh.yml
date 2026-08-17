@@ -34,7 +34,7 @@
   become: false
   slurp:
     src: "{{ home_dir }}/.ssh/id_ed25519.pub"
-    register: pubkey
+  register: pubkey
 
 - name: Display public key
   debug:
