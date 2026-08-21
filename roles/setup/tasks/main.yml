@@ -29,6 +29,11 @@
   tags:
     - fzf
 
+- name: Include zoxide setup
+  import_tasks: zoxide.yml
+  tags:
+    - zoxide
+
 - name: Include repository cloning
   import_tasks: repos.yml
   tags:
