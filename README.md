@@ -14,7 +14,7 @@ Install the following tools with OS package manager:
 ## Cloning
 
 Clone the repository to `~/.local/src`:
-```console
+```shell
 git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/src/vm-bootstrap
 ```
 
@@ -30,7 +30,7 @@ It remembers which directories you use most frequently, so you can "jump" to the
 ### Deployment
 
 Deploy a configuration of `TOOL`:
-```console
+```shell
 make stow TOOL=<tool>
 ```
 
