@@ -1,29 +1,23 @@
-## Install
-```shell
-make install
-make
-```
-
-
 ## TO-DO
-- Color Highlighter: https://github.com/dtonon/ch
-- cd replacement: https://github.com/ajeetdsouza/zoxide
+- Color Highlighter: [ch](https://github.com/dtonon/ch)
+- Code statistics: [tokei](https://github.com/xampprocky/tokei)
+- `cd` replacement: [zoxide](https://github.com/ajeetdsouza/zoxide)
+- `find` replacement: [fd](https://github.com/sharkdp/fd)
+- `grep` replacement: [ripgrep](https://github.com/burntsushi/ripgrep)
 
 ## Requirements
-Install with OS package manager:
-- fzf
-- [bat/catbat](https://github.com/sharkdp/bat)
-- stow
+Install the following tools with OS package manager:
+- [bat](https://github.com/sharkdp/bat) - needed for previewing text file content with fzf
+- [fzf](https://github.com/junegunn/fzf)
+- [GNU stow](https://github.com/aspiers/stow) - dotfile organizer
 
----
 ## Cloning
 
-Clone the repository to
-```shell
+Clone the repository to `~/.local/src`:
+```console
 git clone https://github.com/mstelmaszyk/vm-bootstrap.git ~/.local/src/vm-bootstrap
 ```
 
----
 ## Dotfiles
 
 - **git**
@@ -36,62 +30,8 @@ It remembers which directories you use most frequently, so you can "jump" to the
 ### Deployment
 
 Deploy a configuration of `TOOL`:
-```shell
-stow --dotfiles -v -d ~/.local/src/vm-bootstrap/dotfiles -t ~/ -R <TOOL>
+```console
+make stow TOOL=<tool>
 ```
 
 ## Cheatsheet
-
-### tmux
-
-`C-a`: prefix key. `Ctrl` and `a` keys pressed together.
-
-`C-space`: second prefix key.
-
-`M`: Meta key. Left `Alt`
-
-`C-a ?` see a list of all available commands
-
-`C-a z`: make a pane go full screen. Hit it again to shink it back to its previous size
-
-#### Session handling
-
-`$ tmux new -s <SESSION_NAME>` create a new session
-
-`$ tmux ls` list all currently running sessions
-
-`C-a d` detach the current session (everyting is left running in the background)
-
-`$ tmux attach -t <SESSION_NAME>` attach to a named session
-
-#### Config reloads
-
-`C-a r` hot-reload configuration
-
-#### Spliting Panes
-
-`C-a |` split horizontally
-
-`C-a -` split vertically
-
-#### Fast Pane-Switching
-
-Navigation between panes without triggering the prefix key.
-
-`M-h` go to the left pane
-
-`M-l` go to the right pane
-
-`M-j` go to the up pane
-
-`M-k` go to the down pane
-
-#### Pane resizing
-
-`M-H` resize pane left
-
-`M-J` resize pane down
-
-`M-K` resize pane up
-
-`M-L` resize pane right
