@@ -29,19 +29,11 @@
   when: not autoload_dir.stat.exists
 
 # -----------------------------------------------------------------------------
-# ADD VIM-RELATED ZSH FUNCTIONS
+# INSTALL PLUGINS
 # -----------------------------------------------------------------------------
 
-- name: Ensure functions are sourced in .zshrc
-  become: false
-  blockinfile:
-    path: "{{ home_dir }}/.zshrc"
-    insertbefore: '^source \$ZSH/oh-my-zsh\.sh'
-    marker: "# {mark} ANSIBLE CUSTOM FUNCTIONS"
-    block: |
-      # Load custom functions
-      for file in {{ home_dir }}/.oh-my-zsh/custom/functions/*.zsh; do
-        source "$file"
-      done
+- name: Install Vim plugins
+  command:
+    cmd: vim -E -s +PlugInstall +qall
 
 # -----------------------------------------------------------------------------
