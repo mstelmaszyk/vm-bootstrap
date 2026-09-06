@@ -49,7 +49,7 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 # VIM INTEGRATION
 # ----------------------------------------------------------------------------
 
-if command -v vim >/dev/null 2>&1; then
+if command -v vim >/dev/null 2>&1 && [ -f ~/.vim/vimrc ]; then
     plugins+=(zsh-vi-mode)
 
     echo -n "> \033[0;30mzsh-vi-mode\033[0m \\033[0;32mON\033[0m\n"
