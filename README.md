@@ -10,7 +10,11 @@ Install the following tools with OS package manager:
 - [bat](https://github.com/sharkdp/bat) - needed for previewing text file content with fzf
 - [fzf](https://github.com/junegunn/fzf)
 - [GNU stow](https://github.com/aspiers/stow) - dotfile organizer
-
+    ```shell
+        wget -P /tmp -- https://ftp.gnu.org/gnu/stow/stow-latest.tar.gz
+        cd /tmp && tar -xvf stow-latest.tar.gz
+        cd stow-*/ && ./configure && sudo make install
+    ```
 ## Cloning
 
 Clone the repository to `~/.local/src`:

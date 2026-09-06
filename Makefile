@@ -12,7 +12,7 @@ help:
 
 stow:
 ifndef TOOL
-	stow --dotfiles -v -d ./dotfiles -t ~ -S
+	stow --dotfiles -v -d ./dotfiles -t ~ -R
 else
-	stow --dotfiles -v -d ./dotfiles -t ~ -S $(TOOL)
+	stow --dotfiles -v -d ./dotfiles -t ~ -R $(TOOL)
 endif
