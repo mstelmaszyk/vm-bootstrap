@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------
 
 - name: Install zsh and dependencies
+  become: true
   ansible.builtin.package:
     name:
      - zsh
@@ -26,7 +27,7 @@
 - name: Set Zsh as a default shell
   become: true
   user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ user_name }}"
     shell: /usr/bin/zsh
   tags: [zsh]
 

@@ -1,5 +1,6 @@
 - name: Ensure required packages are installed
-  package:
+  become: true
+  ansible.builtin.package:
     name:
       - curl
     state: present
@@ -34,21 +35,16 @@
   tags:
     - tmux
 
-- name: Install ripgrep
+- name: Install ripgrep and zoxide
   become: true
   ansible.builtin.package:
-    name: ripgrep
+    name:
+      - ripgrep
+      - zoxide
     state: present
-  tags: [ripgrep]
+  tags: [ripgrep, zoxide]
 
-- name: Install zoxide
-  become: true
-  ansible.builtin.package:
-    name: zoxide
-    state: present
-  tags: [zoxide]
-
-- name: Include repository cloning
-  import_tasks: repos.yml
-  tags:
-    - repos
+# - name: Include repository cloning
+#   import_tasks: repos.yml
+#   tags:
+#     - repos

@@ -5,9 +5,10 @@
 - name: Ensure .ssh directory exists
   become: false
   file:
-    path: "{{ home_dir }}/.ssh"
+    path: "{{ user_home }}/.ssh"
     state: directory
     mode: '0700'
+  tags: [ssh]
 
 # -----------------------------------------------------------------------------
 # GENERATE SSH KEY
@@ -15,16 +16,18 @@
 
 - name: Check if SSH key exists
   stat:
-    path: "{{ home_dir }}/.ssh/id_ed25519"
+    path: "{{ user_home }}/.ssh/id_ed25519"
   register: ssh_key
+  tags: [ssh]
 
 - name: Generate SSH key
   become: false
   openssh_keypair:
-    path: "{{ home_dir }}/.ssh/id_ed25519"
+    path: "{{ user_home }}/.ssh/id_ed25519"
     type: ed25519
     comment: "{{ git_user_email | default('generated-by-ansible') }}"
   when: not ssh_key.stat.exists
+  tags: [ssh]
 
 # -----------------------------------------------------------------------------
 # SHOW PUBLIC KEY
@@ -33,11 +36,13 @@
 - name: Read public key
   become: false
   slurp:
-    src: "{{ home_dir }}/.ssh/id_ed25519.pub"
+    src: "{{ user_home }}/.ssh/id_ed25519.pub"
   register: pubkey
+  tags: [ssh]
 
 - name: Display public key
   debug:
     msg: "{{ pubkey.content | b64decode }}"
+  tags: [ssh]
 
 # -----------------------------------------------------------------------------

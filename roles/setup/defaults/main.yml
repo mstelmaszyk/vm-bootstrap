@@ -1,5 +1,6 @@
 
 user_home: "{{ ansible_facts['user_dir'] }}"
+user_name: "{{ ansible_facts['user_id'] }}"
 
 # -----------------------------------------------------------------------------
 # GIT CONFIGURATION
