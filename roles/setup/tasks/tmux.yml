@@ -1,0 +1,19 @@
+# -----------------------------------------------------------------------------
+# TMUX SETUP
+# -----------------------------------------------------------------------------
+
+- name: Ensure tmux is installed
+  become: true
+  ansible.builtin.package:
+    name: tmux
+    state: present
+  tags: [tmux]
+
+# -----------------------------------------------------------------------------
+# DEPLOY .TMUX.CONF
+# -----------------------------------------------------------------------------
+
+- include_tasks: deploy_dotfile.yml
+  vars:
+    dotfile_name: "tmux"
+  tags: [tmux]

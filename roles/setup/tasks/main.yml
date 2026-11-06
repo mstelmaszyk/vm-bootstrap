@@ -29,10 +29,24 @@
   tags:
     - fzf
 
-- name: Include zoxide setup
-  import_tasks: zoxide.yml
+- name: Include tmux setup
+  import_tasks: tmux.yml
   tags:
-    - zoxide
+    - tmux
+
+- name: Install ripgrep
+  become: true
+  ansible.builtin.package:
+    name: ripgrep
+    state: present
+  tags: [ripgrep]
+
+- name: Install zoxide
+  become: true
+  ansible.builtin.package:
+    name: zoxide
+    state: present
+  tags: [zoxide]
 
 - name: Include repository cloning
   import_tasks: repos.yml

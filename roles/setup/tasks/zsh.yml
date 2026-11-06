@@ -2,37 +2,33 @@
 # ZSH SETUP
 # -----------------------------------------------------------------------------
 
-- name: Ensure zsh is installed
-  become: yes
-  package:
-    name: zsh
+- name: Install zsh and dependencies
+  ansible.builtin.package:
+    name:
+     - zsh
+     - git
+     - curl
     state: present
+  tags: [zsh]
 
 # -----------------------------------------------------------------------------
 # INSTALL OH-MY-ZSH
 # -----------------------------------------------------------------------------
 
-- name: Check if Oh-My-Zsh is installed
-  stat:
-    path: "{{ home_dir }}/.oh-my-zsh"
-  register: ohmyzsh_dir
+- name: Clone Oh My Zsh
   become: false
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ user_home }}/.oh-my-zsh"
+    depth: 1
+  tags: [zsh]
 
-- name: Install Oh-My-Zsh
-  become: false
-  shell: |
-    RUNZSH=no CHSH=no sh -c \
-      "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  args:
-    executable: /bin/bash
-  when: not ohmyzsh_dir.stat.exists
-
-- name: Set Zsh as default shell
-  become: yes
+- name: Set Zsh as a default shell
+  become: true
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
-
+  tags: [zsh]
 
 # -----------------------------------------------------------------------------
 # INSTALL THEME
@@ -42,17 +38,19 @@
   become: false
   git:
     repo: "{{ zsh_theme.repo }}"
-    dest: "{{ home_dir }}/.oh-my-zsh/custom/themes/{{ zsh_theme.name }}"
+    dest: "{{ user_home }}/.oh-my-zsh/custom/themes/{{ zsh_theme.name }}"
     depth: 1
   when: zsh_theme.repo is defined
+  tags: [zsh]
 
 - name: Deploy theme config
   become: false
   copy:
     src: "{{ zsh_theme.config_file }}"
-    dest: "{{ home_dir }}/.p10k.zsh"
+    dest: "{{ user_home }}/.p10k.zsh"
     mode: '0644'
   when: zsh_theme.config_file is defined
+  tags: [zsh]
 
 # -----------------------------------------------------------------------------
 # PLUGINS
@@ -61,18 +59,20 @@
 - name: Ensure plugin directory exists
   become: false
   file:
-    path: "{{ home_dir }}/.oh-my-zsh/custom/plugins"
+    path: "{{ user_home }}/.oh-my-zsh/custom/plugins"
     state: directory
     mode: '0755'
+  tags: [zsh]
 
 - name: Install external Zsh plugins
   become: false
   git:
     repo: "{{ item.repo }}"
-    dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/{{ item.name }}"
+    dest: "{{ user_home }}/.oh-my-zsh/custom/plugins/{{ item.name }}"
     depth: 1
   loop: "{{ zsh_plugins }}"
   when: item.repo is defined
+  tags: [zsh]
 
 # -----------------------------------------------------------------------------
 # DEPLOY .ZSHRC
@@ -81,5 +81,6 @@
 - include_tasks: deploy_dotfile.yml
   vars:
     dotfile_name: "zsh"
+  tags: [zsh]
 
 # -----------------------------------------------------------------------------

@@ -3,29 +3,17 @@
 # -----------------------------------------------------------------------------
 
 - name: Ensure Stow is already installed
-  become: yes
-  package:
+  become: true
+  ansible.builtin.package:
     name: stow
     state: present
-  register: stow_present
-
-- name: Download Stow RPM
-  get_url:
-    url: "{{ stow.url_rpm }}"
-    dest: /tmp/stow-latest.tar.gz
-  register: stow_download
-  when: stow_present is failed
-
-- name: Install Stow RPM
-  package:
-    name: /tmp/stow.rpm
-    state: present
-  when: stow_download is succeeded
 
 - name: "Deploy {{ dotfile_name }} dotfile"
   become: false
-  shell: |
-    RUNZSH=no CHSH=no sh -c \
-      "$(stow --dotfiles -v {{ home_dir }}/.local/src/vm-bootstrap/dotfiles -t ~/ -R {{ dotfile_name }})"
-  args:
-    executable: /bin/bash
+  ansible.builtin.command:
+    cmd: >-
+      stow --dotfiles -v
+      -d {{ playbook_dir }}/dotfiles
+      -t {{ user_home }}
+      -R {{ dotfile_name }}
+  changed_when: true

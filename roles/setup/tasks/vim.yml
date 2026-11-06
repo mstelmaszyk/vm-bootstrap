@@ -3,37 +3,48 @@
 # -----------------------------------------------------------------------------
 
 - name: Ensure Vim is installed
-  become: yes
-  package:
+  become: true
+  ansible.builtin.package:
     name: vim
     state: present
+  tags: [vim]
 
 # -----------------------------------------------------------------------------
-# INSTALL PLUGINS
+# VIM-PLUG
 # -----------------------------------------------------------------------------
 
-- name: Check if vim-plug is already installed
-  stat:
-    path: "{{ home_dir }}/.vim/autoload"
-  register: autoload_dir
-  become: false
+- name: Create ~/.vim/autoload
+  ansible.builtin.file:
+    path: "{{ user_home }}/.vim/autoload"
+    state: directory
+    mode: "0755"
+  tags: [vim]
 
 - name: Install vim-plug
-  become: false
-  shell: |
-    RUNZSH=no CHSH=no sh -c \
-      "$(curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)"
-  args:
-    executable: /bin/bash
-  when: not autoload_dir.stat.exists
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ user_home }}/.vim/autoload/plug.vim"
+    mode: "0644"
+  tags: [vim]
 
 # -----------------------------------------------------------------------------
-# INSTALL PLUGINS
+# DEPLOY .VIMRC
+# -----------------------------------------------------------------------------
+
+- include_tasks: deploy_dotfile.yml
+  vars:
+    dotfile_name: "vim"
+  tags: [vim]
+
+# -----------------------------------------------------------------------------
+# PLUGINS
 # -----------------------------------------------------------------------------
 
 - name: Install Vim plugins
-  command:
-    cmd: vim -E -s +PlugInstall +qall
+  ansible.builtin.command:
+    cmd: vim -es -u {{ user_home }}/.vim/vimrc -i NONE -c "PlugInstall" -c "qa"
+  register: plug_install
+  changed_when: "'Installing' in plug_install.stdout or 'Installing' in plug_install.stderr"
+  tags: [vim]
 
 # -----------------------------------------------------------------------------

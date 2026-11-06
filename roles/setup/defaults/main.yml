@@ -1,3 +1,6 @@
+
+user_home: "{{ ansible_facts['user_dir'] }}"
+
 # -----------------------------------------------------------------------------
 # GIT CONFIGURATION
 # -----------------------------------------------------------------------------
@@ -18,8 +21,6 @@ zsh_plugins:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting
   - name: zsh-autosuggestions
     repo: https://github.com/zsh-users/zsh-autosuggestions
-
-zsh_vim_plugins:
   - name: zsh-vi-mode
     repo: https://github.com/jeffreytse/zsh-vi-mode
 

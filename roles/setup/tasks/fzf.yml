@@ -1,37 +1,38 @@
 - name: Ensure required packages are installed
-  package:
+  become: true
+  ansible.builtin.package:
     name:
       - git
       - curl
     state: present
-
-- name: Ensure fzf repository is not present
-  become: false
-  file:
-    path: ~/.local/src/fzf
-    state: absent
+  tags: [fzf]
 
 - name: Clone fzf repository
-  become: false
-  git:
+  ansible.builtin.git:
     repo: https://github.com/junegunn/fzf.git
-    dest: ~/.local/src/fzf
+    dest: "{{ user_home }}/.local/src/fzf"
     version: master
+    depth: 1
+  tags: [fzf]
 
-- name: Install fzf
-  become: false
-  command: ./install
-  args:
-    chdir: ~/.local/src/fzf
-  register: fzf_install
-  no_log: false
-  async: 0
-  poll: 0
+- name: Install fzf binary
+  ansible.builtin.command:
+    cmd: ./install --bin
+    chdir: "{{ user_home }}/.local/src/fzf"
+    creates: "{{ user_home }}/.local/src/fzf/bin/fzf"
+  tags: [fzf]
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/bin"
+    state: directory
+    mode: "0755"
+  tags: [fzf]
 
 - name: Symlink fzf binary
-  become: false
-  file:
-    src: ~/.local/src/fzf/bin/fzf
-    path: ~/.local/bin/fzf
+  ansible.builtin.file:
+    src: "{{ user_home }}/.local/src/fzf/bin/fzf"
+    dest: "{{ user_home }}/.local/bin/fzf"
     state: link
     force: true
+  tags: [fzf]
